@@ -13,6 +13,11 @@ import { AccessTokenGuard } from './authentication/guards/access-token.guard';
 import { AuthenticationGuard } from './authentication/guards/authentication.guard';
 import { RefreshTokenIdsStorage } from './authentication/refresh-token-ids.storage';
 import { RolesGuard } from './authorization/guards/roles.guard';
+import { PolicyHandlerStorage } from './authorization/policies/policy-handlers.storage';
+import { FrameworkContributorPolicyHandler } from './authorization/policies/framework-contributor.policy';
+import { SessionAuthenticationService } from './authentication/session-authentication.service';
+import { SessionAuthenticationController } from './authentication/session-authentication.controller';
+import { UserSerializer } from './authentication/serializers/user-serializer';
 
 @Module({
   imports: [
@@ -37,7 +42,11 @@ import { RolesGuard } from './authorization/guards/roles.guard';
     AccessTokenGuard,
     RefreshTokenIdsStorage,
     AuthenticationService,
+    PolicyHandlerStorage,
+    FrameworkContributorPolicyHandler,
+    SessionAuthenticationService,
+    UserSerializer,
   ],
-  controllers: [AuthenticationController],
+  controllers: [AuthenticationController, SessionAuthenticationController],
 })
 export class IamModule {}
